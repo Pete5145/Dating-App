@@ -1,9 +1,13 @@
-// Select all elements of interest
-let avatarFile = document.getElementById("avatar"); 
-let preview = document.getElementById("preview");
-
-    
-avatarFile.addEventListener("change", (event) => {
-    let fileName = event.target.files[0].name;
-    preview.src = fileName;
-});
+window.onload = function() {
+    var files =  document.querySelectorAll("input[type=file]");
+    console.log(files);
+    files[0].addEventListener("change", function(e) {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("preview").src = e.target.result;
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+}
